@@ -1,9 +1,8 @@
 import '../css/style.css'
-import javascriptLogo from '../../public/images/javaScript.svg'
-import viteLogo from '../../public/images/vite.svg'
 import { sideNav } from './sideNavigation'
 
 document.getElementById('app').appendChild(sideNav)
+
 /* 
 document.querySelector('#app').innerHTML = `
 

@@ -1,21 +1,19 @@
+import { createElementType } from "./Components/utils"
 
 
-export function createElementType(id, typeOfElement) {
-    const elementType = document.createElement(typeOfElement);
-    elementType.setAttribute('id', id);   
-    return elementType;
+const createFolder = () =>  {
+   const folderBtn = {
+   main: createElementType('sideNavTodoBtn', 'button'),
+   icon: createElementType('folder-icon', 'div'),
+   p:    createElementType('', 'p')
+
+   }
+   folderBtn.main.appendChild(folderBtn.icon)
+   folderBtn.main.appendChild(folderBtn.p)
+   folderBtn.p.textContent = "folder"
+
+   FoldersArea.appendChild(folderBtn.main)
 }
-
-
-
-
-/* 
-export function createButton(id) {
-    const button = document.createElement('button');
-    button.setAttribute('id', id);
-    return button;
-} */
-
 
 
 const TodoBtn ={
@@ -47,30 +45,32 @@ PriorityBtn.p.textContent = 'Priority';
 
 const mainButtons = createElementType('mainButtonArea', 'div')
 
+const Divider = createElementType('dotted-lines', 'div')
 
 mainButtons.appendChild(TodoBtn.main)
 mainButtons.appendChild(CalendarBtn.main)
 mainButtons.appendChild(PriorityBtn.main)
+mainButtons.appendChild(Divider)
 
-const Divider = createElementType('dotted-lines', 'div')
 
 const FoldersArea = createElementType('folder-area', 'div')
 
 const AddFolderBtn ={ 
     
     main: createElementType('Newfolder', 'button'),
-    icon: createElementType('priority-icon', 'div'),
+    icon: createElementType('add-icon', 'div'),
     p:    createElementType('', 'p'),
-
 }
 AddFolderBtn.main.appendChild(AddFolderBtn.icon)
 AddFolderBtn.main.appendChild(AddFolderBtn.p)
 AddFolderBtn.p.textContent = 'New Folder';
+AddFolderBtn.main.addEventListener("click", createFolder)
+
+
 
 
 export const sideNav  = createElementType('sideNav', 'div')
 
 sideNav.appendChild(mainButtons)
-sideNav.appendChild(Divider)
 sideNav.appendChild(FoldersArea)
 sideNav.appendChild(AddFolderBtn.main)

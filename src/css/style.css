@@ -53,6 +53,8 @@ h1 {
 
 #app {
 display: flex;
+width: 100vw;
+height: 100vh;
 }
 
 .logo {
@@ -95,7 +97,7 @@ button:focus-visible {
   justify-content: space-around;
   align-items: center;
   width: 80vw;
-  height: 80vh;
+  height: 100vh;
   gap: 2vh;
   background-color: var(--mainGreen)
 	}

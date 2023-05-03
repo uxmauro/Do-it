@@ -91,16 +91,6 @@ button:focus-visible {
 }
 
 */
-#content{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 80vw;
-  height: 100vh;
-  gap: 2vh;
-  background-color: var(--mainGreen)
-	}
 
 
 #sideNav{
@@ -219,6 +209,38 @@ button:focus-visible {
 	}
 
 
+	/* Content */
+	#noTaskBtn{
+	cursor: pointer;
+	width: 100%;
+	height: 48px;
+	left: 0px;
+	top: 0px;
+	border: none;
+	background-image: url('../../public/images/noTaskBtn-Dark.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: var(--mainGreen);
+	border-radius: 4px;
+	}
+
+
+
+	
+
+	#content{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		width: 80vw;
+		height: 100vh;
+		gap: 2vh;
+		  }
+	  
+
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -251,4 +273,10 @@ button:focus-visible {
 #Newfolder p {
 	 color: var(--gray30);
 }
+
+#noTaskBtn{
+	cursor: pointer;
+	background-image: url('../../public/images/noTaskBtn-Light.svg');
+	}
+
  }

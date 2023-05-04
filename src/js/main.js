@@ -1,9 +1,11 @@
 import '../css/style.css'
 import { sideNav } from './sideNavigation'
 import { contentSection } from './content'
+import {folderModal} from './Components/modal'
 
 document.getElementById('app').appendChild(sideNav)
 document.getElementById('app').appendChild(contentSection)
+document.getElementById('app').appendChild(folderModal.fullModal)
 
 /* 
 document.querySelector('#app').innerHTML = `

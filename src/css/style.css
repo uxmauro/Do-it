@@ -271,7 +271,7 @@ button:focus-visible {
 
 	#inputSection{
 		display: flex;
-		gap: 24px;
+		gap: 16px;
 		width: 88%;
 		flex-direction: column;
 	}

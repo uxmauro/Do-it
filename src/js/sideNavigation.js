@@ -1,7 +1,19 @@
 import { createElementType } from "./Components/utils"
+import { folderModal, closeModal } from "./Components/modal"
+
+const resetInput =() =>{
+   let addbtn = document.getElementById("foldermodal-add");
+   addbtn.style.cursor = 'not-allowed'
+   addbtn.style.opacity = '10%'
+}
 
 
-const createFolder = () =>  {
+const openModal = () =>  {
+   document.getElementById('app').appendChild(folderModal.fullModal)
+   resetInput()
+   }   
+
+export const createFolder = () =>  {
    const folderBtn = {
    main: createElementType('sideNavTodoBtn', 'button'),
    icon: createElementType('folder-icon', 'div'),
@@ -10,9 +22,9 @@ const createFolder = () =>  {
    }
    folderBtn.main.appendChild(folderBtn.icon)
    folderBtn.main.appendChild(folderBtn.p)
-   folderBtn.p.textContent = "folder"
-
+   folderBtn.p.textContent = document.getElementById('folderInput').value
    FoldersArea.appendChild(folderBtn.main)
+   closeModal()
 }
 
 
@@ -61,12 +73,11 @@ const AddFolderBtn ={
     icon: createElementType('add-icon', 'div'),
     p:    createElementType('', 'p'),
 }
+
 AddFolderBtn.main.appendChild(AddFolderBtn.icon)
 AddFolderBtn.main.appendChild(AddFolderBtn.p)
 AddFolderBtn.p.textContent = 'New Folder';
-AddFolderBtn.main.addEventListener("click", createFolder)
-
-
+AddFolderBtn.main.addEventListener("click", openModal)
 
 
 export const sideNav  = createElementType('sideNav', 'div')

@@ -5,7 +5,7 @@ import {folderModal} from './Components/modal'
 
 document.getElementById('app').appendChild(sideNav)
 document.getElementById('app').appendChild(contentSection)
-document.getElementById('app').appendChild(folderModal.fullModal)
+
 
 /* 
 document.querySelector('#app').innerHTML = `

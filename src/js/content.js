@@ -1,11 +1,11 @@
 import { createElementType } from "./Components/utils";
-import { taskInput } from "./Components/taskInput";
+import { addTaskModal} from "./Components/modal"; 
 
-const addFirstTask = () => {
+   const addFirstTask = () => {
       
    document.getElementById('noTaskDiv').remove()
-   document.getElementById('content').appendChild(taskInput.taskInput)
-}
+   document.getElementById('content').appendChild(addTaskModal.taskInput)
+   }
 
  const noTask = {
     main: createElementType('noTaskDiv', 'div'),
@@ -14,7 +14,7 @@ const addFirstTask = () => {
 
      showNoTask: () => {
       noTask.header.textContent = 'Create your first ToDo'
-      noTask.button.addEventListener('click',addFirstTask)
+      noTask.button.addEventListener('click',addFirstTask) 
       noTask.main.appendChild(noTask.header)
       noTask.main.appendChild(noTask.button)
       return noTask.main

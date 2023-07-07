@@ -1,4 +1,4 @@
-import '../css/style.css'
+import '../css/global.css'
 import { sideNav } from './sideNavigation'
 import { contentSection } from './content'
 import {folderModal} from './Components/modal'

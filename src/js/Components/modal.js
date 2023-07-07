@@ -12,6 +12,50 @@ export const closeModal  = () =>  {
    
 }
 
+
+//Add Task Modal
+export const addTaskModal = {
+
+    main: createElementType('taskInput-main', 'div'),
+    firstRow: createElementType('taskRow', 'div'),
+    secondRow: createElementType('taskRow', 'div'),
+    topLeft: createElementType('','div', 'taskInput-topLeft' ),
+    closeButton: createElementType('', 'button', 'taskInput-close'),
+    titleInput: createElementType('taskInput-input', 'input'),
+    textArea: createElementType('taskInput-textarea', 'textarea'),
+    btnArea: createElementType('', 'div', 'taskInput-btnArea'),
+    btnAreaTop: createElementType('taskInput-btnArea-Bottom', 'div'),
+    btnAreaBottom: createElementType('taskInput-btnArea-Bottom', 'div'),
+    selectFolderBtn: createElementType('taskInput-selectBtn', 'button'),
+    setPriorityBtn: createElementType('taskInput-selectBtn', 'button'),
+    setDate: createElementType('taskInput-selectBtn', 'button'),
+
+    get taskInput() {
+        this.titleInput.placeholder = "Title"
+        this.textArea.placeholder = "Description"
+        this.setDate.innerText = "Set Date"
+        this.selectFolderBtn.innerText = "Folder"
+        this.setPriorityBtn.innerText = "setPriorityBtn"
+        this.main.appendChild(this.firstRow);
+        this.main.appendChild(this.secondRow);
+        this.firstRow.appendChild(this.topLeft)
+        this.firstRow.appendChild(this.btnArea)
+        this.topLeft.appendChild(this.closeButton)
+        this.topLeft.appendChild(this.titleInput)
+        this.secondRow.appendChild(this.textArea)
+        this.btnArea.appendChild(this.setDate)
+        this.btnAreaBottom.appendChild(this.setPriorityBtn)
+        this.btnAreaBottom.appendChild(this.selectFolderBtn)
+        this.btnArea.appendChild(this.btnAreaBottom)
+        return this.main;
+      }
+}
+
+
+
+
+
+//Folder Modal
 export const folderModal = {
     main: createElementType('foldermodal-bg', 'div'),
     modal: createElementType('foldermodal', 'div'),

@@ -1,7 +1,11 @@
 
 
 export default {
-    
+
+    css: {
+        modules: true,
+      },
+
     build: {
         outDir: '../dist'
     },

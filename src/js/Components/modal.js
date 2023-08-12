@@ -33,7 +33,7 @@ export const addTaskModal = {
     get taskInput() {
         this.titleInput.placeholder = "Title"
         this.textArea.placeholder = "Description"
-        this.setDate.innerText = "Set Date"
+        this.setDate.innerText = "Due Date"
         this.selectFolderBtn.innerText = "Folder"
         this.setPriorityBtn.innerText = "setPriorityBtn"
         this.main.appendChild(this.firstRow);
@@ -54,35 +54,35 @@ export const addTaskModal = {
 
 
 
-
 //Folder Modal
 export const folderModal = {
+  
     main: createElementType('foldermodal-bg', 'div'),
     modal: createElementType('foldermodal', 'div'),
-    h3: createElementType('', 'h3'),
+    modalelement: createElementType('', 'div', 'foldermodalelement'),
     inputSection: createElementType('inputSection', 'div'),
     label: createElementType('folderLabel', 'label'),
     inputField:  createElementType('folderInput', 'input'),
+    ctabuttons: createElementType('', 'div', 'foldermodalcta'),
     addBtn: createElementType('foldermodal-add', 'button'),
     cancelBtn: createElementType('foldermodal-cancel', 'button'),
    
 
     get fullModal() {
-        this.h3.textContent = 'New Folder'
         this.label.setAttribute('for', 'folderName');
         this.inputField.setAttribute('type', 'text');
+        this.inputField.setAttribute('placeholder', 'Folder');
         this.inputField.addEventListener('input', this.checkInput);
-        this.label.textContent = 'Folder Name'
         this.addBtn.textContent = 'Add'
         this.cancelBtn.textContent = 'Cancel'
         this.cancelBtn.addEventListener('click',closeModal)
-        this.main.appendChild(this.modal);
-        this.modal.appendChild(this.h3)
+        this.main.appendChild(this.modalelement);
+        this.modalelement.appendChild(this.modal)
         this.modal.appendChild(this.inputSection)
-        this.inputSection.appendChild(this.label)
         this.inputSection.appendChild(this.inputField)
-        this.inputSection.appendChild(this.addBtn)
-        this.inputSection.appendChild(this.cancelBtn)
+        this.modalelement.appendChild(this.ctabuttons)
+        this.ctabuttons.appendChild(this.cancelBtn)
+        this.ctabuttons.appendChild(this.addBtn)
        
         return this.main;
       },
@@ -95,7 +95,6 @@ export const folderModal = {
         }
     
     },
-    
 } 
 
 

@@ -12,7 +12,7 @@
     padding: 8px;
     background: rgba(199, 234, 26, 0.2);
     border-radius: 40px;
-    background-image: url('public/images/taskInput-close.svg');
+    background-image: url('/images/taskInput-close.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size:50%;

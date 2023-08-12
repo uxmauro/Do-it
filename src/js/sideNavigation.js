@@ -23,7 +23,7 @@ export const createFolder = () =>  {
    folderBtn.main.appendChild(folderBtn.icon)
    folderBtn.main.appendChild(folderBtn.p)
    folderBtn.p.textContent = document.getElementById('folderInput').value
-   FoldersArea.appendChild(folderBtn.main)
+   FoldersArea.div.appendChild(folderBtn.main)
    closeModal()
 }
 
@@ -65,7 +65,17 @@ mainButtons.appendChild(PriorityBtn.main)
 mainButtons.appendChild(Divider)
 
 
-const FoldersArea = createElementType('folder-area', 'div')
+const FoldersArea = {
+   div: createElementType('folder-area', 'div'),
+   label: createElementType('', 'p', 'folders-area-label'),
+
+   get folders() {
+      this.label.textContent = 'Folders'
+      this.div.appendChild(this.label)
+      return this.div
+   }
+
+}
 
 const AddFolderBtn ={ 
     
@@ -83,5 +93,5 @@ AddFolderBtn.main.addEventListener("click", openModal)
 export const sideNav  = createElementType('sideNav', 'div')
 
 sideNav.appendChild(mainButtons)
-sideNav.appendChild(FoldersArea)
+sideNav.appendChild(FoldersArea.folders)
 sideNav.appendChild(AddFolderBtn.main)

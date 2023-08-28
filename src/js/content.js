@@ -4,7 +4,7 @@ import { addTaskModal} from "./Components/modal";
    const addFirstTask = () => {
       
    document.getElementById('noTaskDiv').remove()
-   document.getElementById('content').appendChild(addTaskModal.taskInput)
+   document.getElementById('app').appendChild(addTaskModal.taskInput)
    }
 
  const noTask = {

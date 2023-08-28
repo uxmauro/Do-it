@@ -11,42 +11,58 @@ export const closeModal  = () =>  {
    
    
 }
+export const closeTaskModal  = () =>  {
+   let app = document.getElementById('app')
+   let modal = document.getElementById('addtaskmodal')
+   app.removeChild(modal)
+   
+   
+}
 
 
 //Add Task Modal
 export const addTaskModal = {
 
-    main: createElementType('taskInput-main', 'div'),
+
+    main: createElementType('addtaskmodal', 'div', 'addtaskmodal-bg'),
+    mainModal: createElementType('mainModal', 'div'),
+    modal: createElementType('taskInput-main', 'div'),
     firstRow: createElementType('taskRow', 'div'),
     secondRow: createElementType('taskRow', 'div'),
-    topLeft: createElementType('','div', 'taskInput-topLeft' ),
-    closeButton: createElementType('', 'button', 'taskInput-close'),
+    thirdRow: createElementType('', 'div', 'btnRow'),
+    addCancelRow: createElementType('', 'div', 'addCancelRow'),
     titleInput: createElementType('taskInput-input', 'input'),
     textArea: createElementType('taskInput-textarea', 'textarea'),
-    btnArea: createElementType('', 'div', 'taskInput-btnArea'),
-    btnAreaTop: createElementType('taskInput-btnArea-Bottom', 'div'),
     btnAreaBottom: createElementType('taskInput-btnArea-Bottom', 'div'),
-    selectFolderBtn: createElementType('taskInput-selectBtn', 'button'),
-    setPriorityBtn: createElementType('taskInput-selectBtn', 'button'),
-    setDate: createElementType('taskInput-selectBtn', 'button'),
+    selectFolderBtn: createElementType('taskInput-selectBtn', 'button', 'selectDrop'),
+    setPriorityBtn: createElementType('taskInput-selectBtn', 'button', 'selectDrop'),
+    addBtn: createElementType('addBtn', 'button', ''),
+    cancelBtn: createElementType('cancelBtn', 'button', ''),
+    setDate: createElementType('taskInput-selectBtn', 'button', 'date-select'),
 
     get taskInput() {
         this.titleInput.placeholder = "Title"
         this.textArea.placeholder = "Description"
         this.setDate.innerText = "Due Date"
         this.selectFolderBtn.innerText = "Folder"
-        this.setPriorityBtn.innerText = "setPriorityBtn"
-        this.main.appendChild(this.firstRow);
-        this.main.appendChild(this.secondRow);
-        this.firstRow.appendChild(this.topLeft)
-        this.firstRow.appendChild(this.btnArea)
-        this.topLeft.appendChild(this.closeButton)
-        this.topLeft.appendChild(this.titleInput)
+        this.setPriorityBtn.innerText = "Priority"
+        this.cancelBtn.innerText = "Cancel"
+        this.addBtn.innerText = "Add"
+        this.cancelBtn.addEventListener('click',closeTaskModal)
+        this.modal.appendChild(this.firstRow);
+        this.modal.appendChild(this.secondRow);
+        this.modal.appendChild(this.thirdRow);
+        this.firstRow.appendChild(this.titleInput)
         this.secondRow.appendChild(this.textArea)
-        this.btnArea.appendChild(this.setDate)
-        this.btnAreaBottom.appendChild(this.setPriorityBtn)
-        this.btnAreaBottom.appendChild(this.selectFolderBtn)
-        this.btnArea.appendChild(this.btnAreaBottom)
+        this.thirdRow.appendChild(this.setDate)
+        this.thirdRow.appendChild(this.setPriorityBtn)
+        this.thirdRow.appendChild(this.selectFolderBtn)
+        this.thirdRow.appendChild(this.btnAreaBottom)
+        this.addCancelRow.appendChild(this.cancelBtn)
+        this.addCancelRow.appendChild(this.addBtn)
+        this.main.appendChild(this.mainModal)
+        this.mainModal.appendChild(this.modal)
+        this.mainModal.appendChild(this.addCancelRow)
         return this.main;
       }
 }

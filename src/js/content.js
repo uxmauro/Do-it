@@ -1,11 +1,47 @@
 import { createElementType } from "./Components/utils";
 import { addTaskModal} from "./Components/modal"; 
+import { myTasks } from "./Components/modal"; 
 
-   const addFirstTask = () => {
-      
-   document.getElementById('noTaskDiv').remove()
+   const addFirstTask = () => {   
    document.getElementById('app').appendChild(addTaskModal.taskInput)
    }
+
+
+export const contentSection  = createElementType('content', 'div')
+
+const allTasks = {
+   main: createElementType('allTasks', 'div'),
+ /*   title: createElementType('', 'h2'),
+   description: createElementType('', 'p'),
+   dueDate: createElementType('', 'button'),
+   priority: createElementType('', 'button'), 
+   folder: createElementType('', 'button'), */
+
+
+
+
+   showTasks: () => {
+      let tasklist = myTasks;
+      tasklist.forEach(task => { 
+   
+         // Create a div for each task
+         const taskDiv = document.createElement('div'); 
+         const titleElement = document.createElement('h2');
+         titleElement.textContent = task.title;
+         taskDiv.appendChild(titleElement);
+         
+         const descriptionElement = document.createElement('p');
+         descriptionElement.textContent = task.description; 
+         taskDiv.appendChild(descriptionElement);
+         
+         
+         allTasks.main.appendChild(taskDiv);
+         contentSection.appendChild(allTasks.main)
+        
+   })
+   } 
+}
+
 
  const noTask = {
     main: createElementType('noTaskDiv', 'div'),
@@ -23,6 +59,17 @@ import { addTaskModal} from "./Components/modal";
    }
 
 
-export const contentSection  = createElementType('content', 'div')
+   const content = () => {
+      if (myTasks.length < 1) {
+   
+         
+        contentSection.append(noTask.showNoTask())
+      
+      } else {
+       allTasks.showTasks()
+       }
+     }
+   
+   content()
+   
 
-contentSection.appendChild(noTask.showNoTask())

@@ -89,19 +89,20 @@
 	}
      #taskInput-textarea{
 		padding-left: 8px;
+		margin-top: 8px;
 		width: 100%;
 		height: auto;
 		outline: none;
 		border: none;
-		font-size: x-large;
-		font-weight: 600;
+		font-size: large;
+		font-weight: 400;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.60);
 		background: #1E1E1E;
    }
 
     #taskInput-input{
 		padding-left: 8px;
-		height: 40px;
+		height: 48px;
 		width: 100%;
 		outline: none;
 		border: none;

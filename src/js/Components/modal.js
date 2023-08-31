@@ -11,13 +11,47 @@ export const closeModal  = () =>  {
    
    
 }
-export const closeTaskModal  = () =>  {
+ const closeTaskModal  = () =>  {
    let app = document.getElementById('app')
    let modal = document.getElementById('addtaskmodal')
    app.removeChild(modal)
    
    
 }
+
+
+
+
+export let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+function Task(title, description, dueDate, priority, folder) {
+    this.title = title,
+    this.description = description 
+    this.dueDate = dueDate
+    this.priority = priority 
+    this.folder = folder
+
+    this.returnTask = function(){
+        console.log( title, description)
+    }
+}
+
+
+
+
+ const addTask  = () =>  {
+   let title = document.getElementById('taskInput-input').value
+   let description = document.getElementById('taskInput-textarea').value
+   let dueDate = "notSpecified"
+   let priority = "notSpecified"
+   let folder = "notSpecified"
+
+   myTasks.push(new Task(title, description, dueDate, priority, folder))
+   localStorage.setItem("tasks", JSON.stringify(myTasks));
+   closeTaskModal()
+   
+}
+
 
 
 //Add Task Modal
@@ -48,6 +82,7 @@ export const addTaskModal = {
         this.setPriorityBtn.innerText = "Priority"
         this.cancelBtn.innerText = "Cancel"
         this.addBtn.innerText = "Add"
+        this.addBtn.addEventListener('click',addTask)
         this.cancelBtn.addEventListener('click',closeTaskModal)
         this.modal.appendChild(this.firstRow);
         this.modal.appendChild(this.secondRow);

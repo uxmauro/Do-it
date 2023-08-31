@@ -13,6 +13,26 @@ const openModal = () =>  {
    resetInput()
    }   
 
+
+   let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
+
+   function Folder(name, tasks) {
+      this.name = name,
+      this.tasks = tasks 
+      this.returnFolder = function(){
+          console.log( title, description)
+      }
+  }
+
+  const addFolder = ()  =>{
+
+   let name = document.getElementById('folderInput').value
+   myFolders.push(new Folder(name, [1,2] ))
+   localStorage.setItem("folders", JSON.stringify(myFolders));
+ }
+
+
+
 export const createFolder = () =>  {
    const folderBtn = {
    main: createElementType('sideNavTodoBtn', 'button'),
@@ -24,8 +44,15 @@ export const createFolder = () =>  {
    folderBtn.main.appendChild(folderBtn.p)
    folderBtn.p.textContent = document.getElementById('folderInput').value
    FoldersArea.div.appendChild(folderBtn.main)
+   addFolder()
    closeModal()
 }
+
+
+
+
+
+
 
 
 const TodoBtn ={
@@ -37,7 +64,9 @@ TodoBtn.main.appendChild(TodoBtn.icon)
 TodoBtn.main.appendChild(TodoBtn.p)
 TodoBtn.p.textContent = 'ToDos';
 
-const CalendarBtn = {
+/*
+   //Calendar Btn
+   const CalendarBtn = {
    main: createElementType('sideNavTodoBtn', 'button'),
    icon: createElementType('calendar-icon', 'div'),
    p:    createElementType('', 'p'),
@@ -45,7 +74,7 @@ const CalendarBtn = {
 CalendarBtn.main.appendChild(CalendarBtn.icon)
 CalendarBtn.main.appendChild(CalendarBtn.p)
 CalendarBtn.p.textContent = 'Calendar';
-
+ */
 const PriorityBtn = {
    main: createElementType('sideNavTodoBtn', 'button'),
    icon: createElementType('priority-icon', 'div'),
@@ -60,8 +89,11 @@ const mainButtons = createElementType('mainButtonArea', 'div')
 const Divider = createElementType('dotted-lines', 'div')
 
 mainButtons.appendChild(TodoBtn.main)
+/* 
+//Calendar Btn
 mainButtons.appendChild(CalendarBtn.main)
-mainButtons.appendChild(PriorityBtn.main)
+
+ */mainButtons.appendChild(PriorityBtn.main)
 mainButtons.appendChild(Divider)
 
 

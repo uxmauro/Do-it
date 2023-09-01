@@ -1,5 +1,6 @@
 import { createElementType } from "./utils";
-import { createFolder } from "../sideNavigation";
+import { addFolder } from "../sideNavigation";
+import { taskElement } from "../content";
 
 
 export const closeModal  = () =>  {
@@ -22,7 +23,7 @@ export const closeModal  = () =>  {
 
 
 
-export let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+ let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
 function Task(title, description, dueDate, priority, folder) {
     this.title = title,
@@ -37,20 +38,23 @@ function Task(title, description, dueDate, priority, folder) {
 }
 
 
-
-
- const addTask  = () =>  {
+ export const addTask  = () =>  {
    let title = document.getElementById('taskInput-input').value
    let description = document.getElementById('taskInput-textarea').value
    let dueDate = "notSpecified"
    let priority = "notSpecified"
    let folder = "notSpecified"
+   let app = document.getElementById('content')
+   let modal = document.getElementById('noTaskDiv')
 
    myTasks.push(new Task(title, description, dueDate, priority, folder))
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
+   app.removeChild(modal)
+   taskElement(new Task(title, description, dueDate, priority, folder))
    
 }
+
 
 
 
@@ -142,7 +146,7 @@ export const folderModal = {
             let addbtn = document.getElementById("foldermodal-add");
             addbtn.style.cursor = 'pointer'
             addbtn.style.opacity = '100%'
-            addbtn.addEventListener('click',createFolder)
+            addbtn.addEventListener('click',addFolder)
         }
     
     },

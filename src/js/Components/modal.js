@@ -15,6 +15,13 @@ export const closeModal  = () =>  {
  const closeTaskModal  = () =>  {
    let app = document.getElementById('app')
    let modal = document.getElementById('addtaskmodal')
+   let title = document.getElementById('taskInput-input')
+   let description = document.getElementById('taskInput-textarea')
+
+   title.value = ''
+   description.value = ''
+
+
    app.removeChild(modal)
    
    
@@ -50,8 +57,8 @@ function Task(title, description, dueDate, priority, folder) {
    myTasks.push(new Task(title, description, dueDate, priority, folder))
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
-   app.removeChild(modal)
    taskElement(new Task(title, description, dueDate, priority, folder))
+   app.removeChild(modal)
    
 }
 

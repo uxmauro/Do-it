@@ -15,26 +15,46 @@ export const contentSection  = createElementType('content', 'div')
 
 export const taskElement = (task) => {
     // Create a div for each task
+
     const taskDiv = createElementType('task','div'); 
+
+
+
+    const leftTaskSection = createElementType('','div', 'leftTaskSection'); 
+    taskDiv.appendChild(leftTaskSection);
+
+    const taskToggle = createElementType('taskToggle','input'); 
+    taskToggle.type = "checkbox"
+    leftTaskSection.appendChild(taskToggle);
+
+    const rightTaskSection = createElementType('','div', 'rightTaskSection'); 
+    taskDiv.appendChild(rightTaskSection);
+
+    const topTaskSection = createElementType('','div', 'topTaskSection'); 
+    rightTaskSection.appendChild(topTaskSection);
+    
     const titleElement = document.createElement('h2');
     titleElement.textContent = task.title;
-    taskDiv.appendChild(titleElement);
+    topTaskSection.appendChild(titleElement);
+
+    const btnsTaskDiv = createElementType('','div', 'btnTaskDiv'); 
+    topTaskSection.appendChild(btnsTaskDiv);
     
     const descriptionElement = document.createElement('p');
     descriptionElement.textContent = task.description; 
-    taskDiv.appendChild(descriptionElement);
+    rightTaskSection.appendChild(descriptionElement);
     
     const dateElement = document.createElement('button');
     dateElement.textContent = task.dueDate; 
-    taskDiv.appendChild(dateElement);
+    btnsTaskDiv.appendChild(dateElement);
     
     const priorityElement = document.createElement('button');
     priorityElement.textContent = task.priority; 
-    taskDiv.appendChild(priorityElement);
+    btnsTaskDiv.appendChild(priorityElement);
     
     const folderElement = document.createElement('button');
     folderElement.textContent = task.folder; 
-    taskDiv.appendChild(folderElement);
+    btnsTaskDiv.appendChild(folderElement);
     
     const addTaskBtn = createElementType('', 'button', 'addTaskBtn');
 

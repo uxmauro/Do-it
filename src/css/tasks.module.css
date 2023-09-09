@@ -7,7 +7,7 @@
     gap: 16px;
     width: 100%;
     height: 100%;
-    padding: 40px
+    padding: 40px;
 }
 
 .addTaskBtn{
@@ -27,10 +27,71 @@
 
 
 #task{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
     padding: 20px;
     width: 80%;
     border-radius: 16px;
     height: fit-content;
     background: #252229;
     box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.25);
+    color: #828282;
+}
+
+
+#task h2 {
+    margin: 0;
+
+}
+
+
+
+.topTaskSection{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.btnTaskDiv{
+    display: flex;
+    gap: 16px;
+}
+
+
+.leftTaskSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4%; 
+}
+
+.rightTaskSection{
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+}
+
+.rightTaskSection p {
+    word-wrap: break-word;
+}
+
+#taskToggle{
+    appearance: none;
+    width: 32px;
+    height: 32px;
+    fill: rgba(199, 234, 26, 0.16);
+    border: 2px solid var(--mainGreen);
+    border-radius: 100%;
+    padding: 2px;
+}
+
+#taskToggle:checked {
+    content: '';
+    background-color: var(--mainGreen);
+
+    border: 2px solid white;
+
 }

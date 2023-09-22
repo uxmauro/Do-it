@@ -9,10 +9,10 @@ export const closeModal  = () =>  {
    let input = document.getElementById('folderInput')
    input.value = ''
    app.removeChild(modal)
-   
-   
+
+
 }
- const closeTaskModal  = () =>  {
+export const closeTaskModal  = () =>  {
    let app = document.getElementById('app')
    let modal = document.getElementById('addtaskmodal')
    let title = document.getElementById('taskInput-input')
@@ -21,24 +21,23 @@ export const closeModal  = () =>  {
    title.value = ''
    description.value = ''
 
-
    app.removeChild(modal)
-   
-   
+
+
 }
 
 
 
 
- let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-function Task(title, description, dueDate, priority, folder) {
+function Task(title, description, dueDate, priority, folder, completed) {
     this.title = title,
-    this.description = description 
+    this.description = description
     this.dueDate = dueDate
-    this.priority = priority 
+    this.priority = priority
     this.folder = folder
-
+    this.completed = completed,
     this.returnTask = function(){
         console.log( title, description)
     }
@@ -48,21 +47,22 @@ function Task(title, description, dueDate, priority, folder) {
  export const addTask  = () =>  {
    let title = document.getElementById('taskInput-input').value
    let description = document.getElementById('taskInput-textarea').value
-   let dueDate = "notSpecified"
+   let dueDate = "Not Set"
    let priority = "notSpecified"
    let folder = "notSpecified"
    let app = document.getElementById('content')
    let modal = document.getElementById('noTaskDiv')
+   let completed = false
 
-   myTasks.push(new Task(title, description, dueDate, priority, folder))
+   if(title.input != '' && description != ''){
+   myTasks.push(new Task(title, description, dueDate, priority, folder, completed))
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
-   taskElement(new Task(title, description, dueDate, priority, folder))
-   app.removeChild(modal)
-   
+   taskElement(new Task(title, description, dueDate, priority, folder, completed))
+   } else{
+    console.log('working')
+   }
 }
-
-
 
 
 //Add Task Modal
@@ -71,7 +71,7 @@ export const addTaskModal = {
 
     main: createElementType('addtaskmodal', 'div', 'addtaskmodal-bg'),
     mainModal: createElementType('mainModal', 'div'),
-    modal: createElementType('taskInput-main', 'div'),
+    modal: createElementType('taskInput-main', 'form'),
     firstRow: createElementType('taskRow', 'div'),
     secondRow: createElementType('taskRow', 'div'),
     thirdRow: createElementType('', 'div', 'btnRow'),
@@ -87,13 +87,14 @@ export const addTaskModal = {
 
     get taskInput() {
         this.titleInput.placeholder = "Title"
+        this.titleInput.addEventListener('input', this.checkInput);
         this.textArea.placeholder = "Description"
+        this.textArea.addEventListener('input', this.checkInput);
         this.setDate.innerText = "Due Date"
         this.selectFolderBtn.innerText = "Folder"
         this.setPriorityBtn.innerText = "Priority"
         this.cancelBtn.innerText = "Cancel"
         this.addBtn.innerText = "Add"
-        this.addBtn.addEventListener('click',addTask)
         this.cancelBtn.addEventListener('click',closeTaskModal)
         this.modal.appendChild(this.firstRow);
         this.modal.appendChild(this.secondRow);
@@ -110,7 +111,16 @@ export const addTaskModal = {
         this.mainModal.appendChild(this.modal)
         this.mainModal.appendChild(this.addCancelRow)
         return this.main;
-      }
+      },
+      checkInput(){
+        if(this.titleInput !== '' && this.textArea !== '' ){
+            let addbtn = document.getElementById("addBtn");
+            addbtn.style.cursor = 'pointer'
+            addbtn.style.opacity = '100%'
+            addbtn.addEventListener('click',addTask)
+        }
+
+    },
 }
 
 
@@ -118,7 +128,7 @@ export const addTaskModal = {
 
 //Folder Modal
 export const folderModal = {
-  
+
     main: createElementType('foldermodal-bg', 'div'),
     modal: createElementType('foldermodal', 'div'),
     modalelement: createElementType('', 'div', 'foldermodalelement'),
@@ -128,7 +138,7 @@ export const folderModal = {
     ctabuttons: createElementType('', 'div', 'foldermodalcta'),
     addBtn: createElementType('foldermodal-add', 'button'),
     cancelBtn: createElementType('foldermodal-cancel', 'button'),
-   
+
 
     get fullModal() {
         this.label.setAttribute('for', 'folderName');
@@ -145,7 +155,7 @@ export const folderModal = {
         this.modalelement.appendChild(this.ctabuttons)
         this.ctabuttons.appendChild(this.cancelBtn)
         this.ctabuttons.appendChild(this.addBtn)
-       
+
         return this.main;
       },
       checkInput(){
@@ -155,8 +165,8 @@ export const folderModal = {
             addbtn.style.opacity = '100%'
             addbtn.addEventListener('click',addFolder)
         }
-    
+
     },
-} 
+}
 
 

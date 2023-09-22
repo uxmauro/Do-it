@@ -1,9 +1,14 @@
 import { createElementType } from "./Components/utils";
-import { addTaskModal} from "./Components/modal"; 
+import { addTaskModal} from "./Components/modal";
 
 
 
-const addFirstTask = () => {   
+const addFirstTask = () => {
+   document.getElementById('app').appendChild(addTaskModal.taskInput)
+   }
+
+
+const editTask = () => {
    document.getElementById('app').appendChild(addTaskModal.taskInput)
    }
 
@@ -15,49 +20,50 @@ export const contentSection  = createElementType('content', 'div')
 
 export const taskElement = (task) => {
     // Create a div for each task
+    const taskDiv = createElementType('task','div');
 
-    const taskDiv = createElementType('task','div'); 
-
-
-
-    const leftTaskSection = createElementType('','div', 'leftTaskSection'); 
+    const leftTaskSection = createElementType('','div', 'leftTaskSection');
     taskDiv.appendChild(leftTaskSection);
 
-    const taskToggle = createElementType('taskToggle','input'); 
+    const taskToggle = createElementType('taskToggle','input');
     taskToggle.type = "checkbox"
     leftTaskSection.appendChild(taskToggle);
 
-    const rightTaskSection = createElementType('','div', 'rightTaskSection'); 
+    const rightTaskSection = createElementType('','div', 'rightTaskSection');
     taskDiv.appendChild(rightTaskSection);
 
-    const topTaskSection = createElementType('','div', 'topTaskSection'); 
+    const topTaskSection = createElementType('','div', 'topTaskSection');
     rightTaskSection.appendChild(topTaskSection);
-    
+
     const titleElement = document.createElement('h2');
     titleElement.textContent = task.title;
     topTaskSection.appendChild(titleElement);
 
-    const btnsTaskDiv = createElementType('','div', 'btnTaskDiv'); 
+    const btnsTaskDiv = createElementType('','div', 'btnTaskDiv');
     topTaskSection.appendChild(btnsTaskDiv);
-    
+
     const descriptionElement = document.createElement('p');
-    descriptionElement.textContent = task.description; 
+    descriptionElement.textContent = task.description;
     rightTaskSection.appendChild(descriptionElement);
-    
-    const dateElement = document.createElement('button');
-    dateElement.textContent = task.dueDate; 
+
+    const dateElement = document.createElement('p');
+    dateElement.textContent = task.dueDate;
     btnsTaskDiv.appendChild(dateElement);
-    
-    const priorityElement = document.createElement('button');
-    priorityElement.textContent = task.priority; 
+
+    const priorityElement = document.createElement('p');
+    priorityElement.textContent = task.priority;
     btnsTaskDiv.appendChild(priorityElement);
-    
-    const folderElement = document.createElement('button');
-    folderElement.textContent = task.folder; 
+
+    const folderElement = document.createElement('p');
+    folderElement.textContent = task.folder;
     btnsTaskDiv.appendChild(folderElement);
-    
+
+    const editBtn = createElementType('','button','editTaskBtn' );
+    btnsTaskDiv.appendChild(editBtn);
+
     const addTaskBtn = createElementType('', 'button', 'addTaskBtn');
 
+    editBtn.addEventListener('click',editTask)
     addTaskBtn.addEventListener('click',addFirstTask)
     allTasks.main.appendChild(taskDiv);
     taskDiv.appendChild(addTaskBtn);
@@ -71,11 +77,11 @@ export const taskElement = (task) => {
 
    showTasks: () => {
       let tasklist = myTasks;
-      tasklist.forEach(task => { 
-         taskElement(task)   
-   
+      tasklist.forEach(task => {
+         taskElement(task)
+
    })
-   } 
+   }
 }
 
 
@@ -86,25 +92,25 @@ export const taskElement = (task) => {
 
      showNoTask: () => {
       noTask.header.textContent = 'Create your first ToDo'
-      noTask.button.addEventListener('click',addFirstTask) 
+      noTask.button.addEventListener('click',addFirstTask)
       noTask.main.appendChild(noTask.header)
       noTask.main.appendChild(noTask.button)
       return noTask.main
     }
- 
+
    }
 
 
    const content = () => {
       if (myTasks.length < 1) {
-   
+
         contentSection.append(noTask.showNoTask())
-      
+
       } else {
        allTasks.showTasks()
        }
      }
-   
+
    content()
-   
+
 

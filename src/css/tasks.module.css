@@ -24,6 +24,20 @@
     height: 40px;
 }
 
+.editTaskBtn{
+    color: white;
+	background-image: url('../../images/editTaskBtn.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+	background-position: center;
+    border-radius: 4px;
+    width: 40px;
+    height: 20px;
+}
+
+.editTaskBtn:hover{
+    opacity: 0.4;
+}
 
 
 #task{
@@ -57,6 +71,7 @@
 
 .btnTaskDiv{
     display: flex;
+    align-items: center;
     gap: 16px;
 }
 
@@ -65,7 +80,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4%; 
+    width: 40px;
 }
 
 .rightTaskSection{
@@ -75,13 +90,14 @@
 }
 
 .rightTaskSection p {
+    margin: 0;
     word-wrap: break-word;
 }
 
 #taskToggle{
     appearance: none;
-    width: 32px;
     height: 32px;
+    width: 100px;
     fill: rgba(199, 234, 26, 0.16);
     border: 2px solid var(--mainGreen);
     border-radius: 100%;
@@ -92,6 +108,5 @@
     content: '';
     background-color: var(--mainGreen);
 
-    border: 2px solid white;
 
 }

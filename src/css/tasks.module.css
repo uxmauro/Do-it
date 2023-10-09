@@ -53,6 +53,12 @@
     color: #828282;
 }
 
+#task.completed h2{
+
+  text-decoration: line-through;
+
+}
+
 
 #task h2 {
     margin: 0;

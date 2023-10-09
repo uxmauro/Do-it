@@ -236,6 +236,7 @@ button:focus-visible {
 		width: 28px;
 		background-image: url(../../images/add-icon.svg);
 		background-size: contain;
+		background-repeat: no-repeat;
 	}
 
 	#folder-icon {

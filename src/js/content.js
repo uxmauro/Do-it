@@ -27,6 +27,9 @@ export const taskElement = (task) => {
 
     const taskToggle = createElementType('taskToggle','input');
     taskToggle.type = "checkbox"
+    taskToggle.addEventListener('click', (e) => {
+      e.target.parentNode.parentNode.classList.toggle('completed')
+    })
     leftTaskSection.appendChild(taskToggle);
 
     const rightTaskSection = createElementType('','div', 'rightTaskSection');

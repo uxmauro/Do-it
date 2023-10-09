@@ -79,13 +79,25 @@ export const addTaskModal = {
     titleInput: createElementType('taskInput-input', 'input'),
     textArea: createElementType('taskInput-textarea', 'textarea'),
     btnAreaBottom: createElementType('taskInput-btnArea-Bottom', 'div'),
-    selectFolderBtn: createElementType('taskInput-selectBtn', 'button', 'selectDrop'),
-    setPriorityBtn: createElementType('taskInput-selectBtn', 'button', 'selectDrop'),
+    selectFolderBtn: createElementType('taskInput-selectBtn', 'select', 'selectDrop'),
+    setPriorityBtn: createElementType('taskInput-selectBtn', 'select', 'selectDrop'),
     addBtn: createElementType('addBtn', 'button', ''),
     cancelBtn: createElementType('cancelBtn', 'button', ''),
     setDate: createElementType('taskInput-selectBtn', 'button', 'date-select'),
 
     get taskInput() {
+        let noTaskDiv = document.getElementById('noTaskDiv')
+        if(noTaskDiv){
+        noTaskDiv.style.display ='none'}
+
+        let folders = document.querySelectorAll('.folderBtn')
+
+        folders.forEach( folder => {
+            let pEl = folder.querySelector('p');
+            let text = pEl.textContent;
+            console.log(text);
+        })
+
         this.titleInput.placeholder = "Title"
         this.titleInput.addEventListener('input', this.checkInput);
         this.textArea.placeholder = "Description"
@@ -113,7 +125,7 @@ export const addTaskModal = {
         return this.main;
       },
       checkInput(){
-        if(this.titleInput !== '' && this.textArea !== '' ){
+        if(this.titleInput != '' && this.textArea != '' ){
             let addbtn = document.getElementById("addBtn");
             addbtn.style.cursor = 'pointer'
             addbtn.style.opacity = '100%'
@@ -168,5 +180,3 @@ export const folderModal = {
 
     },
 }
-
-

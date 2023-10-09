@@ -119,7 +119,7 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
 
 export const createFolder = (folder) =>  {
    const folderBtn = {
-   main: createElementType('sideNavTodoBtn', 'button'),
+   main: createElementType('sideNavTodoBtn', 'button', 'folderBtn'),
    icon: createElementType('folder-icon', 'div'),
    p:    createElementType('', 'p')
 

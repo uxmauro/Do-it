@@ -37,10 +37,7 @@ function Task(title, description, dueDate, priority, folder, completed) {
     this.dueDate = dueDate
     this.priority = priority
     this.folder = folder
-    this.completed = completed,
-    this.returnTask = function(){
-        console.log( title, description)
-    }
+    this.completed = completed;
 }
 
 // Set Tasks //

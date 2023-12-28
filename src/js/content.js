@@ -18,18 +18,40 @@ let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
 export const contentSection  = createElementType('content', 'div')
 
+
+
+//Change task completion in localstorage
+const taskChecked = (e) => {
+
+   let tasksDisplayed = Array.from(document.getElementById("allTasks").children)
+   let taskIndex = (tasksDisplayed.indexOf(e.target.parentNode.parentNode))
+   let myTaskEdit = JSON.parse(localStorage.getItem("tasks"))
+   {
+      if (e.target.checked){
+      myTaskEdit[taskIndex].completed = true
+        localStorage.setItem("tasks", JSON.stringify(myTaskEdit))
+      }else{
+        myTaskEdit[taskIndex].completed = false
+        localStorage.setItem("tasks", JSON.stringify(myTaskEdit))
+      }}
+  }
+
+
+
 export const taskElement = (task) => {
     // Create a div for each task
     const taskDiv = createElementType('task','div');
 
     const leftTaskSection = createElementType('','div', 'leftTaskSection');
     taskDiv.appendChild(leftTaskSection);
-
     const taskToggle = createElementType('taskToggle','input');
     taskToggle.type = "checkbox"
     taskToggle.addEventListener('click', (e) => {
       e.target.parentNode.parentNode.classList.toggle('completed')
+
     })
+
+    taskToggle.addEventListener('change', e => taskChecked(e))
     leftTaskSection.appendChild(taskToggle);
 
     const rightTaskSection = createElementType('','div', 'rightTaskSection');
@@ -72,6 +94,9 @@ export const taskElement = (task) => {
     taskDiv.appendChild(addTaskBtn);
     contentSection.appendChild(allTasks.main)
 }
+
+
+
 
 
  const allTasks = {

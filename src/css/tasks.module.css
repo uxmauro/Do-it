@@ -81,6 +81,9 @@
     gap: 16px;
 }
 
+.btnTaskDiv p{
+    font-weight: 700;
+}
 
 .leftTaskSection{
     display: flex;

@@ -146,9 +146,29 @@
 #setPriority{
 	color: var(--mainGreen);
 	font-weight: 600;
-	padding: 20px;
+	padding: 20px 30px;
+	background-position-x: 90%;
+	padding-left: 8px;
 
 }
+
+
+
+select{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-image: url('/images/chevron-down.svg');
+	background-repeat: no-repeat;
+	background-position-x: 80%;
+	background-position-y: center;
+}
+
+select:focus {
+	outline: none;
+	background-color: #232323;
+  }
+
+
 
 
 .selectDrop{

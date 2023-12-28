@@ -93,10 +93,10 @@ export const addTaskModal = {
         this.setDate.innerText = "Due Date"
         this.setDate.type = "date"
         this.selectFolderBtn.innerHTML = `
-        <option value="Not Set"selected>Not Set</option>
+        <option value="Not Set"selected>Folder</option>
       `;
         this.setPriorityBtn.innerHTML = `
-        <option value="Not Set"selected>Not Set</option>
+        <option value="Not Set"selected>Priority</option>
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
         <option value="High">High</option>

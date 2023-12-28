@@ -15,7 +15,7 @@
 	height: 50%;
 	width: 100%;
 	justify-content: end;
-	padding-right: 1em;
+	gap: 20px;
 }
 
 
@@ -128,21 +128,37 @@
 }
 
 
+#taskInput-selectBtn::-webkit-calendar-picker-indicator {
+	opacity: 20%;
+  }
+
 #taskInput-selectBtn{
 	color: var(--mainGreen);
 	font-weight: 600;
 }
 
+#SelectFolder{
+	color: var(--mainGreen);
+	font-weight: 600;
+}
+
+
+#setPriority{
+	color: var(--mainGreen);
+	font-weight: 600;
+	padding: 20px;
+
+}
+
+
 .selectDrop{
 	padding: 0 30px;
-	background-image: url('/images/chevron-down.svg');
-	background-repeat: no-repeat;
-	background-position-x: 92px;
-	background-position-y: center;
+	border-radius: 4px;
+	border: 2px solid #C7EA1A;
 }
 
 .date-select{
-	padding: 10px 48px;
+	padding: 10px 8px;
 	padding-left: 60px;
 	border-radius: 4px;
 	border: 2px solid #C7EA1A;

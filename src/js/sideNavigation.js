@@ -117,7 +117,7 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
 
 
 
-export const createFolder = (folder) =>  {
+   export const createFolder = (folder) =>  {
    const folderBtn = {
    main: createElementType('sideNavTodoBtn', 'button', 'folderBtn'),
    icon: createElementType('folder-icon', 'div'),
@@ -141,10 +141,7 @@ const checkFolders = () => {
       let showAll = () => {
          let folderLists = myFolders;
          folderLists.forEach(folder => {
-
             createFolder(folder)
-
-
          })
       }
       showAll()

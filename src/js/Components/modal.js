@@ -28,8 +28,8 @@ export const closeTaskModal  = () =>  {
 
 
 
-
-let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+// Get Tasks //
+const myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
 function Task(title, description, dueDate, priority, folder, completed) {
     this.title = title,
@@ -43,13 +43,13 @@ function Task(title, description, dueDate, priority, folder, completed) {
     }
 }
 
-
+// Set Tasks //
  export const addTask  = () =>  {
    let title = document.getElementById('taskInput-input').value
    let description = document.getElementById('taskInput-textarea').value
-   let dueDate = "Not Set"
-   let priority = "notSpecified"
-   let folder = "notSpecified"
+   let dueDate = document.getElementById('taskInput-selectBtn').value
+   let priority = document.getElementById('setPriority').value
+   let folder = document.getElementById('SelectFolder').value
    let app = document.getElementById('content')
    let modal = document.getElementById('noTaskDiv')
    let completed = false
@@ -59,8 +59,6 @@ function Task(title, description, dueDate, priority, folder, completed) {
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
    taskElement(new Task(title, description, dueDate, priority, folder, completed))
-   } else{
-    console.log('working')
    }
 }
 
@@ -79,32 +77,34 @@ export const addTaskModal = {
     titleInput: createElementType('taskInput-input', 'input'),
     textArea: createElementType('taskInput-textarea', 'textarea'),
     btnAreaBottom: createElementType('taskInput-btnArea-Bottom', 'div'),
-    selectFolderBtn: createElementType('taskInput-selectBtn', 'select', 'selectDrop'),
-    setPriorityBtn: createElementType('taskInput-selectBtn', 'select', 'selectDrop'),
+    selectFolderBtn: createElementType('SelectFolder', 'select', 'selectDrop'),
+    setPriorityBtn: createElementType('setPriority', 'select', 'selectDrop'),
     addBtn: createElementType('addBtn', 'button', ''),
     cancelBtn: createElementType('cancelBtn', 'button', ''),
-    setDate: createElementType('taskInput-selectBtn', 'button', 'date-select'),
+    setDate: createElementType('taskInput-selectBtn', 'input', 'date-select'),
+
 
     get taskInput() {
         let noTaskDiv = document.getElementById('noTaskDiv')
         if(noTaskDiv){
         noTaskDiv.style.display ='none'}
 
-        let folders = document.querySelectorAll('.folderBtn')
-
-        folders.forEach( folder => {
-            let pEl = folder.querySelector('p');
-            let text = pEl.textContent;
-            console.log(text);
-        })
-
         this.titleInput.placeholder = "Title"
         this.titleInput.addEventListener('input', this.checkInput);
         this.textArea.placeholder = "Description"
         this.textArea.addEventListener('input', this.checkInput);
         this.setDate.innerText = "Due Date"
-        this.selectFolderBtn.innerText = "Folder"
-        this.setPriorityBtn.innerText = "Priority"
+        this.setDate.type = "date"
+        this.selectFolderBtn.innerHTML = `
+        <option value="Not Set"selected>Not Set</option>
+      `;
+        this.setPriorityBtn.innerHTML = `
+        <option value="Not Set"selected>Not Set</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      `;
+
         this.cancelBtn.innerText = "Cancel"
         this.addBtn.innerText = "Add"
         this.cancelBtn.addEventListener('click',closeTaskModal)
@@ -122,6 +122,20 @@ export const addTaskModal = {
         this.main.appendChild(this.mainModal)
         this.mainModal.appendChild(this.modal)
         this.mainModal.appendChild(this.addCancelRow)
+
+        let folders = document.querySelectorAll('.folderBtn')
+        folders.forEach( folder => {
+            let pEl = folder.querySelector('p');
+            let text = pEl.textContent;
+
+            let option = document.createElement('option');
+            option.value = text; // Use the folder text as the option's value
+            option.text = text;  // Use the folder text as the option's displayed text
+
+            // Append the <option> element to the <select>
+            this.selectFolderBtn.appendChild(option);
+        })
+
         return this.main;
       },
       checkInput(){

@@ -48,6 +48,8 @@ export const taskElement = (task) => {
     taskToggle.type = "checkbox"
     if(task.completed){
       taskToggle.checked = true;
+      taskDiv.classList.add('completed');
+
     }
     taskToggle.addEventListener('click', (e) => {
       e.target.parentNode.parentNode.classList.toggle('completed')

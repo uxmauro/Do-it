@@ -1,6 +1,6 @@
 import { createElementType } from "./Components/utils"
-import { folderModal, closeModal } from "./Components/modal"
-import { taskElement } from "./content";
+import { folderModal, closeFolderModal } from "./Components/modal"
+import { taskElement, addTaskBtn } from "./content";
 
 
 export const sideNav  = createElementType('sideNav', 'div')
@@ -20,12 +20,7 @@ const setPriorities = () => {
    const priority = document.getElementById('priorityBtn')
    const todo = document.getElementById('todoBtn')
    const taskArea = document.getElementById('content')
-   const addTaskBtns = document.querySelectorAll('.addTaskBtn');
    todo.classList.remove('started')
-  /*  addTaskBtns.forEach(btn => {
-      btn.style.display = 'none';
-    }); */
-   console.log(addTaskBtns)
    priority.classList.add('started')
 
    if(taskArea.firstChild){
@@ -33,11 +28,9 @@ const setPriorities = () => {
    }
 
    // Filter tasks with priority "High"
-
    let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
    let tasklist = myTasks
    let highPriorityTasks = tasklist.filter(task => task.priority === "High");
-   console.log(highPriorityTasks)
    highPriorityTasks.forEach(task => {
       taskElement(task);
    });
@@ -56,6 +49,7 @@ const setTodos = () => {
    }
 
    let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+   addTaskBtn()
    myTasks.forEach(task => {
       taskElement(task); })
 }
@@ -152,7 +146,7 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
    myFolders.push(new Folder(name, [1,2] ))
    localStorage.setItem("folders", JSON.stringify(myFolders));
    createFolder(new Folder(name, [1,2] ))
-   closeModal()
+   closeFolderModal()
    } else{
       resetInput()
    }

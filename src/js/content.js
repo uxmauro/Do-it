@@ -38,6 +38,8 @@ const taskChecked = (e) => {
 
 
 
+
+
 export const taskElement = (task) => {
     // Create a div for each task
     const taskDiv = createElementType('task','div');
@@ -88,18 +90,17 @@ export const taskElement = (task) => {
     const editBtn = createElementType('','button','editTaskBtn' );
     btnsTaskDiv.appendChild(editBtn);
 
-
-    const addTaskBtnChck = document.getElementById('addTaskBtn')
-    if(addTaskBtnChck == null){
-    const addTaskBtn = createElementType('addTaskBtn', 'button', 'addTaskBtn');
-    addTaskBtn.addEventListener('click',addFirstTask)
-    taskDiv.appendChild(addTaskBtn);
-    }
     editBtn.addEventListener('click',editTask)
     allTasks.main.appendChild(taskDiv);
     contentSection.appendChild(allTasks.main)
 }
 
+
+export const addTaskBtn = () => {
+  const button = createElementType('addTaskBtn', 'button', 'addTaskBtn');
+  button.addEventListener('click', addFirstTask);
+  contentSection.appendChild(button);
+}
 
 
 
@@ -108,6 +109,8 @@ export const taskElement = (task) => {
    main: createElementType('allTasks', 'div'),
 
    showTasks: () => {
+
+    addTaskBtn()
       let tasklist = myTasks;
       tasklist.forEach(task => {
          taskElement(task)

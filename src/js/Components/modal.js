@@ -3,7 +3,7 @@ import { addFolder } from "../sideNavigation";
 import { taskElement, noTask } from "../content";
 
 
-export const closeModal  = () =>  {
+export const closeFolderModal  = () =>  {
    let app = document.getElementById('app')
    let modal = document.getElementById('foldermodal-bg')
    let input = document.getElementById('folderInput')
@@ -173,7 +173,7 @@ export const folderModal = {
         this.inputField.addEventListener('input', this.checkInput);
         this.addBtn.textContent = 'Add'
         this.cancelBtn.textContent = 'Cancel'
-        this.cancelBtn.addEventListener('click',closeModal)
+        this.cancelBtn.addEventListener('click',closeFolderModal)
         this.main.appendChild(this.modalelement);
         this.modalelement.appendChild(this.modal)
         this.modal.appendChild(this.inputSection)

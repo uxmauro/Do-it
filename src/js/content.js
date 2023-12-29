@@ -41,7 +41,6 @@ const taskChecked = (e) => {
 export const taskElement = (task) => {
     // Create a div for each task
     const taskDiv = createElementType('task','div');
-
     const leftTaskSection = createElementType('','div', 'leftTaskSection');
     taskDiv.appendChild(leftTaskSection);
     const taskToggle = createElementType('taskToggle','input');
@@ -104,7 +103,6 @@ export const taskElement = (task) => {
 
  const allTasks = {
    main: createElementType('allTasks', 'div'),
-
 
    showTasks: () => {
       let tasklist = myTasks;

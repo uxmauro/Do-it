@@ -1,18 +1,62 @@
 import { createElementType } from "./Components/utils"
 import { folderModal, closeModal } from "./Components/modal"
+import { taskElement } from "./content";
+
 
 export const sideNav  = createElementType('sideNav', 'div')
 
 
-const removeAcitve = (clickedButton) => {
-   const buttons = document.querySelectorAll("#sideNavTodoBtn");
-
-   buttons.forEach(button => {
-         button.classList.remove("started");
-       })
-/*
-          clickedButton.classList.add("started") */
+const removeAllTasks = (element) => {
+   while (element.firstChild) {
+      removeAllTasks(element.firstChild);
+      element.removeChild(element.firstChild);
+   }
 }
+
+//Side Nav Selection
+const setPriorities = () => {
+   const priority = document.getElementById('priorityBtn')
+   const todo = document.getElementById('todoBtn')
+   const taskArea = document.getElementById('content')
+   todo.classList.remove('started')
+   priority.classList.add('started')
+
+
+
+   if(taskArea.firstChild){
+      removeAllTasks(taskArea);
+   }
+
+
+   let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+   // Filter tasks with priority "High"
+   let tasklist = myTasks
+   let highPriorityTasks = tasklist.filter(task => task.priority === "High");
+   console.log(highPriorityTasks)
+   highPriorityTasks.forEach(task => {
+      taskElement(task);
+   });
+
+}
+
+const setTodos = () => {
+   const priority = document.getElementById('priorityBtn')
+   const todo = document.getElementById('todoBtn')
+   const taskArea = document.getElementById('content')
+   priority.classList.remove('started')
+   todo.classList.add('started')
+
+  if(taskArea.firstChild){
+      removeAllTasks(taskArea);
+   }
+   let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+   myTasks.forEach(task => {
+      taskElement(task); })
+
+}
+
 
 
 
@@ -22,25 +66,21 @@ const openModal = () =>  {
    }
 
 const TodoBtn ={
-   main: createElementType('sideNavTodoBtn', 'button'),
-   icon: createElementType('todo-icon', 'div'),
-   p:    createElementType('', 'p'),
+   main: createElementType('todoBtn', 'button', 'sideNavTodoBtn' )
 }
+TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
 TodoBtn.main.classList.add('started')
-TodoBtn.main.appendChild(TodoBtn.icon)
-TodoBtn.main.appendChild(TodoBtn.p)
-TodoBtn.p.textContent = 'ToDos';
+TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
+TodoBtn.main.addEventListener('click', setTodos)
+
+
 
 const PriorityBtn = {
-   main: createElementType('sideNavTodoBtn', 'button'),
-   icon: createElementType('priority-icon', 'div'),
-   p:    createElementType('', 'p'),
+   main: createElementType('priorityBtn', 'button', 'sideNavTodoBtn'),
 }
+PriorityBtn.main.innerHTML=`<div id="priority-icon"></div><p>Priority</p>`
+PriorityBtn.main.addEventListener('click', setPriorities)
 
-PriorityBtn.main.appendChild(PriorityBtn.icon)
-PriorityBtn.main.appendChild(PriorityBtn.p)
-PriorityBtn.main.addEventListener('click', removeAcitve(PriorityBtn.main))
-PriorityBtn.p.textContent = 'Priority';
 
 const mainButtons = createElementType('mainButtonArea', 'div')
 
@@ -119,7 +159,7 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
 
    export const createFolder = (folder) =>  {
    const folderBtn = {
-   main: createElementType('sideNavTodoBtn', 'button', 'folderBtn'),
+   main: createElementType('folderBtn', 'button', 'sideNavTodoBtn'),
    icon: createElementType('folder-icon', 'div'),
    p:    createElementType('', 'p')
 
@@ -151,16 +191,3 @@ const checkFolders = () => {
 
 checkFolders()
 
-
-
-
-/*   //Calendar Btn
-   const CalendarBtn = {
-   main: createElementType('sideNavTodoBtn', 'button'),
-   icon: createElementType('calendar-icon', 'div'),
-   p:    createElementType('', 'p'),
-}
-CalendarBtn.main.appendChild(CalendarBtn.icon)
-CalendarBtn.main.appendChild(CalendarBtn.p)
-CalendarBtn.p.textContent = 'Calendar';
- */

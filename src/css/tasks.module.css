@@ -29,7 +29,7 @@
     opacity: 0;
 }
 
-.editTaskBtn{
+.optionsBtn{
     color: white;
 	background-image: url('../../images/editTaskBtn.svg');
     background-size: contain;
@@ -40,10 +40,17 @@
     height: 20px;
 }
 
-.editTaskBtn:hover{
+.optionsBtn:hover{
     opacity: 0.4;
 }
 
+
+#optionsMenu{
+    width: 200px;
+    height: 80px;
+    background-color: antiquewhite;
+
+}
 
 #task{
     display: flex;

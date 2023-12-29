@@ -8,9 +8,18 @@ const addFirstTask = () => {
    }
 
 
-const editTask = () => {
-   document.getElementById('app').appendChild(addTaskModal.taskInput)
+const optionsBtnClick = (e) => {
+    const optionBtns =  document.querySelectorAll('#optionsBtn')
+
+    optionBtns.forEach((button, index) => {
+ const clickedIndex = Array.from(optionBtns).indexOf(e.target);
+    optionBtns[clickedIndex].appendChild(optionsMenu)
+})
    }
+
+   const optionsMenu =
+   createElementType('optionsMenu', 'div')
+
 
 
 let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
@@ -87,10 +96,10 @@ export const taskElement = (task) => {
     folderElement.textContent = task.folder;
     btnsTaskDiv.appendChild(folderElement);
 
-    const editBtn = createElementType('','button','editTaskBtn' );
-    btnsTaskDiv.appendChild(editBtn);
+    const optionsBtn = createElementType('optionsBtn','button','optionsBtn' );
+    btnsTaskDiv.appendChild(optionsBtn);
 
-    editBtn.addEventListener('click',editTask)
+    optionsBtn.addEventListener('click',optionsBtnClick)
     allTasks.main.appendChild(taskDiv);
     contentSection.appendChild(allTasks.main)
 }

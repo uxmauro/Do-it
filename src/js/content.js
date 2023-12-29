@@ -88,12 +88,15 @@ export const taskElement = (task) => {
     const editBtn = createElementType('','button','editTaskBtn' );
     btnsTaskDiv.appendChild(editBtn);
 
-    const addTaskBtn = createElementType('', 'button', 'addTaskBtn');
 
-    editBtn.addEventListener('click',editTask)
+    const addTaskBtnChck = document.getElementById('addTaskBtn')
+    if(addTaskBtnChck == null){
+    const addTaskBtn = createElementType('addTaskBtn', 'button', 'addTaskBtn');
     addTaskBtn.addEventListener('click',addFirstTask)
-    allTasks.main.appendChild(taskDiv);
     taskDiv.appendChild(addTaskBtn);
+    }
+    editBtn.addEventListener('click',editTask)
+    allTasks.main.appendChild(taskDiv);
     contentSection.appendChild(allTasks.main)
 }
 
@@ -114,15 +117,13 @@ export const taskElement = (task) => {
 }
 
 
- const noTask = {
+export const noTask = {
     main: createElementType('noTaskDiv', 'div'),
     button: createElementType('noTaskBtn', 'button'),
-    header: createElementType('noTaskH3', 'h3'),
 
      showNoTask: () => {
-      noTask.header.textContent = 'Create your first ToDo'
+      noTask.main.innerHTML=`<h3 id="noTaskH3">Create your first ToDo</h3>`
       noTask.button.addEventListener('click',addFirstTask)
-      noTask.main.appendChild(noTask.header)
       noTask.main.appendChild(noTask.button)
       return noTask.main
     }
@@ -132,9 +133,7 @@ export const taskElement = (task) => {
 
    const content = () => {
       if (myTasks.length < 1) {
-
         contentSection.append(noTask.showNoTask())
-
       } else {
        allTasks.showTasks()
        }

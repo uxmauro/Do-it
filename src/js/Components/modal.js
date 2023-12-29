@@ -1,6 +1,6 @@
 import { createElementType } from "./utils";
 import { addFolder } from "../sideNavigation";
-import { taskElement } from "../content";
+import { taskElement, noTask } from "../content";
 
 
 export const closeModal  = () =>  {
@@ -17,11 +17,16 @@ export const closeTaskModal  = () =>  {
    let modal = document.getElementById('addtaskmodal')
    let title = document.getElementById('taskInput-input')
    let description = document.getElementById('taskInput-textarea')
-
+   let curentTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
    title.value = ''
    description.value = ''
 
    app.removeChild(modal)
+   /* Fix removing no Task Btn when clicking cancel on first task modal */
+   if (curentTasks.length < 1) {
+    if(noTaskDiv){
+      noTaskDiv.style.display =''}
+  }
 
 
 }
@@ -126,10 +131,8 @@ export const addTaskModal = {
             let text = pEl.textContent;
 
             let option = document.createElement('option');
-            option.value = text; // Use the folder text as the option's value
-            option.text = text;  // Use the folder text as the option's displayed text
-
-            // Append the <option> element to the <select>
+            option.value = text;
+            option.text = text;
             this.selectFolderBtn.appendChild(option);
         })
 

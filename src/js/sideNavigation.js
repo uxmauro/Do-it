@@ -13,24 +13,28 @@ const removeAllTasks = (element) => {
    }
 }
 
-//Side Nav Selection
+
+
 const setPriorities = () => {
+   //Side Nav Selection
    const priority = document.getElementById('priorityBtn')
    const todo = document.getElementById('todoBtn')
    const taskArea = document.getElementById('content')
+   const addTaskBtns = document.querySelectorAll('.addTaskBtn');
    todo.classList.remove('started')
+  /*  addTaskBtns.forEach(btn => {
+      btn.style.display = 'none';
+    }); */
+   console.log(addTaskBtns)
    priority.classList.add('started')
-
-
 
    if(taskArea.firstChild){
       removeAllTasks(taskArea);
    }
 
+   // Filter tasks with priority "High"
 
    let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-
-   // Filter tasks with priority "High"
    let tasklist = myTasks
    let highPriorityTasks = tasklist.filter(task => task.priority === "High");
    console.log(highPriorityTasks)
@@ -50,11 +54,10 @@ const setTodos = () => {
   if(taskArea.firstChild){
       removeAllTasks(taskArea);
    }
-   let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
+   let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
    myTasks.forEach(task => {
       taskElement(task); })
-
 }
 
 

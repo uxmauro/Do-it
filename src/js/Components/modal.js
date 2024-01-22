@@ -90,6 +90,7 @@ export const addTaskModal = {
         let noTaskDiv = document.getElementById('noTaskDiv')
         if(noTaskDiv){
         noTaskDiv.style.display ='none'}
+        const folders = JSON.parse(localStorage.getItem("folders") || "[]");
 
         this.titleInput.placeholder = "Title"
         this.titleInput.addEventListener('input', this.checkInput);
@@ -97,9 +98,17 @@ export const addTaskModal = {
         this.textArea.addEventListener('input', this.checkInput);
         this.setDate.innerText = "Due Date"
         this.setDate.type = "date"
+        let setFolders = false;
+        let folderSelect = ''
+        folders.forEach( folder => {
+          folderSelect += `<option value=${folder.name}>${folder.name}</option>`;
+          return folderSelect
+        }
+        )
         this.selectFolderBtn.innerHTML = `
-        <option value="Not Set"selected>Folder</option>
-      `;
+        <option value="Not Set"selected>Not Set</option>${folderSelect}`
+
+
         this.setPriorityBtn.innerHTML = `
         <option value="Not Set"selected>Priority</option>
         <option value="Low">Low</option>
@@ -124,18 +133,6 @@ export const addTaskModal = {
         this.main.appendChild(this.mainModal)
         this.mainModal.appendChild(this.modal)
         this.mainModal.appendChild(this.addCancelRow)
-
-        let folders = document.querySelectorAll('.folderBtn')
-        folders.forEach( folder => {
-            let pEl = folder.querySelector('p');
-            let text = pEl.textContent;
-
-            let option = document.createElement('option');
-            option.value = text;
-            option.text = text;
-            this.selectFolderBtn.appendChild(option);
-        })
-
         return this.main;
       },
       checkInput(){

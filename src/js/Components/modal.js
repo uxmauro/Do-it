@@ -1,6 +1,7 @@
 import { createElementType } from "./utils";
 import { addFolder } from "../sideNavigation";
 import { taskElement, noTask } from "../content";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const closeFolderModal  = () =>  {
@@ -36,13 +37,14 @@ export const closeTaskModal  = () =>  {
 // Get Tasks //
 const myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-function Task(title, description, dueDate, priority, folder, completed) {
+function Task(title, description, dueDate, priority, folder, completed, id) {
     this.title = title,
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
     this.folder = folder
-    this.completed = completed;
+    this.completed = completed
+    this.id = id;
 }
 
 // Set Tasks //
@@ -55,19 +57,19 @@ function Task(title, description, dueDate, priority, folder, completed) {
    let app = document.getElementById('content')
    let modal = document.getElementById('noTaskDiv')
    let completed = false
+   let id = uuidv4()
 
    if(title.input != '' && description != ''){
-   myTasks.push(new Task(title, description, dueDate, priority, folder, completed))
+   myTasks.push(new Task(title, description, dueDate, priority, folder, completed, id))
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
-   taskElement(new Task(title, description, dueDate, priority, folder, completed))
+   taskElement(new Task(title, description, dueDate, priority, folder, completed, id))
    }
 }
 
 
 //Add Task Modal
 export const addTaskModal = {
-
 
     main: createElementType('addtaskmodal', 'div', 'addtaskmodal-bg'),
     mainModal: createElementType('mainModal', 'div'),

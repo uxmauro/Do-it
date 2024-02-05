@@ -29,29 +29,28 @@ export const contentSection  = createElementType('content', 'div')
 
 
 
-//Change task completion in localstorage
-const taskChecked = (e) => {
 
-   let tasksDisplayed = Array.from(document.getElementById("allTasks").children)
-   let taskIndex = (tasksDisplayed.indexOf(e.target.parentNode.parentNode))
-   let myTaskEdit = JSON.parse(localStorage.getItem("tasks"))
-   {
-      if (e.target.checked){
-      myTaskEdit[taskIndex].completed = true
-        localStorage.setItem("tasks", JSON.stringify(myTaskEdit))
-      }else{
-        myTaskEdit[taskIndex].completed = false
-        localStorage.setItem("tasks", JSON.stringify(myTaskEdit))
-      }}
-  }
+  const taskChecked = (e) => {
+    const taskId = e.target.parentNode.parentNode.getAttribute('data-id');
+    let myTaskEdit = JSON.parse(localStorage.getItem("tasks")) || [];
+    // Find the task with the corresponding ID
+    const taskToUpdate = myTaskEdit.find(task => task.id === taskId);
+    if (taskToUpdate) {
+      // Update the completed status
+      taskToUpdate.completed = e.target.checked;
+      // Update local storage
+      localStorage.setItem("tasks", JSON.stringify(myTaskEdit));
+    }
+  };
 
 
 
 
-
+//Task ELement
 export const taskElement = (task) => {
     // Create a div for each task
     const taskDiv = createElementType('task','div');
+    taskDiv.setAttribute("data-id", task.id)
     const leftTaskSection = createElementType('','div', 'leftTaskSection');
     taskDiv.appendChild(leftTaskSection);
     const taskToggle = createElementType('taskToggle','input');

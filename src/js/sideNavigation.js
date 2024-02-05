@@ -78,7 +78,6 @@ const PriorityBtn = {
 PriorityBtn.main.innerHTML=`<div id="priority-icon"></div><p>Priority</p>`
 PriorityBtn.main.addEventListener('click', setPriorities)
 
-
 const mainButtons = createElementType('mainButtonArea', 'div')
 
 const Divider = createElementType('dotted-lines', 'div')

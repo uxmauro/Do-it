@@ -25,5 +25,8 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.2.2",
     "vite": "^4.3.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
   }
 }

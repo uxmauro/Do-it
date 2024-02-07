@@ -1,6 +1,8 @@
 import { createElementType } from "./Components/utils"
 import { folderModal, closeFolderModal } from "./Components/modal"
 import { taskElement, addTaskBtn } from "./content";
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 export const sideNav  = createElementType('sideNav', 'div')
@@ -79,9 +81,7 @@ PriorityBtn.main.innerHTML=`<div id="priority-icon"></div><p>Priority</p>`
 PriorityBtn.main.addEventListener('click', setPriorities)
 
 const mainButtons = createElementType('mainButtonArea', 'div')
-
 const Divider = createElementType('dotted-lines', 'div')
-
 mainButtons.appendChild(TodoBtn.main)
 mainButtons.appendChild(PriorityBtn.main)
 mainButtons.appendChild(Divider)
@@ -90,7 +90,6 @@ mainButtons.appendChild(Divider)
 
 
 const AddFolderBtn ={
-
     main: createElementType('Newfolder', 'button'),
     icon: createElementType('add-icon', 'div'),
     p:    createElementType('', 'p'),
@@ -130,9 +129,9 @@ sideNav.appendChild(AddFolderBtn.main)
 
 let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
 
-   function Folder(name, tasks) {
+   function Folder(name, id) {
       this.name = name,
-      this.tasks = tasks
+      this.id = id
       this.returnFolder = function(){
           console.log( title, description)
       }
@@ -141,10 +140,11 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
   export const addFolder = ()  =>{
 
    let name = document.getElementById('folderInput').value
+   let id = uuidv4()
    if(name != ''){
-   myFolders.push(new Folder(name, [1,2] ))
+   myFolders.push(new Folder(name, id ))
    localStorage.setItem("folders", JSON.stringify(myFolders));
-   createFolder(new Folder(name, [1,2] ))
+   createFolder(new Folder(name, id ))
    closeFolderModal()
    } else{
       resetInput()
@@ -158,11 +158,13 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
    main: createElementType('folderBtn', 'button', 'sideNavTodoBtn'),
    icon: createElementType('folder-icon', 'div'),
    p:    createElementType('', 'p')
-
    }
 
    folderBtn.main.appendChild(folderBtn.icon)
    folderBtn.main.appendChild(folderBtn.p)
+   folderBtn.main.addEventListener('click', (e) => {
+      console.log(e);
+    });
    folderBtn.p.textContent = folder.name;
    FoldersArea.div.appendChild(folderBtn.main)
 }

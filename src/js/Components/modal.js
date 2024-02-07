@@ -37,7 +37,7 @@ export const closeTaskModal  = () =>  {
 // Get Tasks //
 const myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-function Task(title, description, dueDate, priority, folder, completed, id) {
+function Task(title, description, dueDate, priority, folder, completed, id, folderId) {
     this.title = title,
     this.description = description
     this.dueDate = dueDate
@@ -45,25 +45,31 @@ function Task(title, description, dueDate, priority, folder, completed, id) {
     this.folder = folder
     this.completed = completed
     this.id = id;
+    this.folderId = folderId;
 }
 
 // Set Tasks //
  export const addTask  = () =>  {
+
+  let selectElement = document.getElementById('SelectFolder');
+  let selectedOption = selectElement.options[selectElement.selectedIndex];
+
    let title = document.getElementById('taskInput-input').value
    let description = document.getElementById('taskInput-textarea').value
    let dueDate = document.getElementById('taskInput-selectBtn').value
    let priority = document.getElementById('setPriority').value
-   let folder = document.getElementById('SelectFolder').value
+   let folder = selectElement.value
    let app = document.getElementById('content')
    let modal = document.getElementById('noTaskDiv')
    let completed = false
    let id = uuidv4()
+   let folderId = selectedOption.getAttribute('data-id')
 
    if(title.input != '' && description != ''){
-   myTasks.push(new Task(title, description, dueDate, priority, folder, completed, id))
+   myTasks.push(new Task(title, description, dueDate, priority, folder, completed, id, folderId))
    localStorage.setItem("tasks", JSON.stringify(myTasks));
    closeTaskModal()
-   taskElement(new Task(title, description, dueDate, priority, folder, completed, id))
+   taskElement(new Task(title, description, dueDate, priority, folder, completed, id, folderId))
    }
 }
 
@@ -103,13 +109,12 @@ export const addTaskModal = {
         let setFolders = false;
         let folderSelect = ''
         folders.forEach( folder => {
-          folderSelect += `<option value=${folder.name}>${folder.name}</option>`;
+          folderSelect += `<option data-id='${folder.id}' value='${folder.name}'> ${folder.name}</option>`;
           return folderSelect
         }
         )
         this.selectFolderBtn.innerHTML = `
         <option value="Not Set"selected>Not Set</option>${folderSelect}`
-
 
         this.setPriorityBtn.innerHTML = `
         <option value="Not Set"selected>Priority</option>

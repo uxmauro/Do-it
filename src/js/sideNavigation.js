@@ -15,15 +15,41 @@ const removeAllTasks = (element) => {
    }
 }
 
+const getFolders = (e) => {
+
+   //Find Folder ID
+   const button = e.target.closest('#folderBtn');
+   button.children[1].classList.add('started')
+   // Remove class from all other folderBtns
+   const folderBtns = document.querySelectorAll('.sideNavTodoBtn');
+   folderBtns.forEach(btn => {
+      if (btn !== button) {
+            btn.children[1].classList.remove('started');
+            btn.classList.remove('started');
+      }
+   });
 
 
-const setPriorities = () => {
-   //Side Nav Selection
+   if (button) {
+       const dataId = button.dataset.id;
+       console.log(dataId);
+   }
+}
+
+const getPriorities = () => {
    const priority = document.getElementById('priorityBtn')
-   const todo = document.getElementById('todoBtn')
-   const taskArea = document.getElementById('content')
-   todo.classList.remove('started')
    priority.classList.add('started')
+   // Remove class from all other SideButtons
+   const TasksBtns = document.querySelectorAll('.sideNavTodoBtn');
+   TasksBtns.forEach(btn => {
+      if (btn !== priority) {
+            btn.children[1].classList.remove('started');
+            btn.classList.remove('started');
+      }
+   });
+
+   //Side Nav Selection
+   const taskArea = document.getElementById('content')
 
    if(taskArea.firstChild){
       removeAllTasks(taskArea);
@@ -31,21 +57,24 @@ const setPriorities = () => {
 
    // Filter tasks with priority "High"
    let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-   let tasklist = myTasks
-   let highPriorityTasks = tasklist.filter(task => task.priority === "High");
+   let highPriorityTasks = myTasks.filter(task => task.priority === "High");
    highPriorityTasks.forEach(task => {
       taskElement(task);
    });
 
 }
 
-const setTodos = () => {
-   const priority = document.getElementById('priorityBtn')
+const getTodos = () => {
    const todo = document.getElementById('todoBtn')
-   const taskArea = document.getElementById('content')
-   priority.classList.remove('started')
    todo.classList.add('started')
-
+   const TasksBtns = document.querySelectorAll('.sideNavTodoBtn');
+   TasksBtns.forEach(btn => {
+      if (btn !== todo) {
+            btn.children[1].classList.remove('started');
+            btn.classList.remove('started');
+      }
+   });
+   const taskArea = document.getElementById('content')
   if(taskArea.firstChild){
       removeAllTasks(taskArea);
    }
@@ -59,7 +88,7 @@ const setTodos = () => {
 
 
 
-const openModal = () =>  {
+const openFolderModal = () =>  {
    document.getElementById('app').appendChild(folderModal.fullModal)
    resetInput()
    }
@@ -70,7 +99,7 @@ const TodoBtn ={
 TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
 TodoBtn.main.classList.add('started')
 TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
-TodoBtn.main.addEventListener('click', setTodos)
+TodoBtn.main.addEventListener('click', getTodos)
 
 
 
@@ -78,7 +107,7 @@ const PriorityBtn = {
    main: createElementType('priorityBtn', 'button', 'sideNavTodoBtn'),
 }
 PriorityBtn.main.innerHTML=`<div id="priority-icon"></div><p>Priority</p>`
-PriorityBtn.main.addEventListener('click', setPriorities)
+PriorityBtn.main.addEventListener('click', getPriorities)
 
 const mainButtons = createElementType('mainButtonArea', 'div')
 const Divider = createElementType('dotted-lines', 'div')
@@ -98,7 +127,7 @@ const AddFolderBtn ={
 AddFolderBtn.main.appendChild(AddFolderBtn.icon)
 AddFolderBtn.main.appendChild(AddFolderBtn.p)
 AddFolderBtn.p.textContent = 'New Folder';
-AddFolderBtn.main.addEventListener("click", openModal)
+AddFolderBtn.main.addEventListener("click", openFolderModal)
 
 
 
@@ -144,7 +173,7 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
    if(name != ''){
    myFolders.push(new Folder(name, id ))
    localStorage.setItem("folders", JSON.stringify(myFolders));
-   createFolder(new Folder(name, id ))
+   createFolder(new Folder(name, id))
    closeFolderModal()
    } else{
       resetInput()
@@ -162,9 +191,8 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
 
    folderBtn.main.appendChild(folderBtn.icon)
    folderBtn.main.appendChild(folderBtn.p)
-   folderBtn.main.addEventListener('click', (e) => {
-      console.log(e);
-    });
+   folderBtn.main.setAttribute('data-id', folder.id);
+   folderBtn.main.addEventListener('click',(e) => { getFolders(e)});
    folderBtn.p.textContent = folder.name;
    FoldersArea.div.appendChild(folderBtn.main)
 }

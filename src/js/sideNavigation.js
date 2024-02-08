@@ -15,6 +15,8 @@ const removeAllTasks = (element) => {
    }
 }
 
+
+//testing
 const getFolders = (e) => {
    //Find Folder ID
    const button = e.target.closest('#folderBtn');

@@ -16,7 +16,6 @@ const removeAllTasks = (element) => {
 }
 
 const getFolders = (e) => {
-
    //Find Folder ID
    const button = e.target.closest('#folderBtn');
    button.children[1].classList.add('started')
@@ -29,11 +28,23 @@ const getFolders = (e) => {
       }
    });
 
+   const taskArea = document.getElementById('content')
+   if(taskArea.firstChild){
+      removeAllTasks(taskArea);
+   }
 
    if (button) {
-       const dataId = button.dataset.id;
-       console.log(dataId);
-   }
+      const dataId = button.dataset.id;
+       // Filter tasks with priority "High"
+  let myTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  let selectedFolderTasks = myTasks.filter(task => task.folderId === dataId);
+  selectedFolderTasks.forEach(task => {
+     taskElement(task);
+  });
+  }
+
+
+
 }
 
 const getPriorities = () => {
@@ -48,9 +59,7 @@ const getPriorities = () => {
       }
    });
 
-   //Side Nav Selection
    const taskArea = document.getElementById('content')
-
    if(taskArea.firstChild){
       removeAllTasks(taskArea);
    }

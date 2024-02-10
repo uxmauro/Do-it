@@ -1,10 +1,14 @@
 import { createElementType } from "./Components/utils";
 import { addTaskModal} from "./Components/modal";
 
-
+let firstTaskAdded = false
 
 const addFirstTask = () => {
    document.getElementById('app').appendChild(addTaskModal.taskInput)
+  if(!firstTaskAdded){
+    allTasks.showTasks()
+    return firstTaskAdded = true
+  }
    }
 
 
@@ -133,7 +137,7 @@ export const noTask = {
     button: createElementType('noTaskBtn', 'button'),
 
      showNoTask: () => {
-      noTask.main.innerHTML=`<h3 id="noTaskH3">Create your first ToDo</h3>`
+      noTask.main.innerHTML=`<h3 id="noTaskH3">Create your first To-Do</h3>`
       noTask.button.addEventListener('click',addFirstTask)
       noTask.main.appendChild(noTask.button)
       return noTask.main

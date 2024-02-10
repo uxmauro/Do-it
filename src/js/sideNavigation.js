@@ -107,9 +107,9 @@ const openFolderModal = () =>  {
 const TodoBtn ={
    main: createElementType('todoBtn', 'button', 'sideNavTodoBtn' )
 }
-TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
+TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>To-Do</p></button>`;
 TodoBtn.main.classList.add('started')
-TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>ToDos</p></button>`;
+TodoBtn.main.innerHTML = `<div id="todo-icon"></div><p>To-Do</p></button>`;
 TodoBtn.main.addEventListener('click', getTodos)
 
 

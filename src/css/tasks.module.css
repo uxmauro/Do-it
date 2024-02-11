@@ -135,3 +135,15 @@
 
 
 }
+
+
+
+
+@media (max-width: 768px) {
+    #task{
+        width: 90%;
+    }
+    .addTaskBtn{
+        right: 24px;
+    }
+}

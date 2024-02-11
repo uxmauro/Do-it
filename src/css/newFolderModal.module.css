@@ -8,6 +8,8 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
+    z-index: 1;
+
 }
 
 #foldermodal{
@@ -48,7 +50,7 @@
     font-weight: 600;
     border-bottom: 1px solid rgba(255, 255, 255, 0.60);
     background: #1E1E1E;
-    
+
 }
 input:focus {
     outline: none;
@@ -67,7 +69,7 @@ input:focus {
     background-color: var(--mainGreen);
     padding: 0 40px;
     opacity: 10%;
-    cursor: not-allowed;	
+    cursor: not-allowed;
 
 }
 

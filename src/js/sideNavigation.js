@@ -7,6 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const sideNav  = createElementType('sideNav', 'div')
 
+//mobile button
+ const mobileBtn =  createElementType('', 'div', 'mobileBtn')
+   mobileBtn.innerHTML = `  <span></span><span></span><span></span>`
+   mobileBtn.addEventListener('click', () => {
+      mobileBtn.classList.toggle("active");
+      sideNav.classList.toggle("active")
+    });
+
 
 const removeAllTasks = (element) => {
    while (element.firstChild) {
@@ -16,7 +24,6 @@ const removeAllTasks = (element) => {
 }
 
 
-//testing
 const getFolders = (e) => {
    //Find Folder ID
    const button = e.target.closest('#folderBtn');
@@ -101,6 +108,8 @@ const getTodos = () => {
 
 const openFolderModal = () =>  {
    document.getElementById('app').appendChild(folderModal.fullModal)
+   sideNav.classList.toggle("active")
+   mobileBtn.classList.toggle("active");
    resetInput()
    }
 
@@ -164,6 +173,7 @@ const FoldersArea = {
 sideNav.appendChild(mainButtons)
 sideNav.appendChild(FoldersArea.folders)
 sideNav.appendChild(AddFolderBtn.main)
+sideNav.appendChild(mobileBtn)
 
 
 
@@ -178,7 +188,6 @@ let myFolders = JSON.parse(localStorage.getItem("folders") || "[]");
   }
 
   export const addFolder = ()  =>{
-
    let name = document.getElementById('folderInput').value
    let id = uuidv4()
    if(name != ''){

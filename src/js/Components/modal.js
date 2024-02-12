@@ -1,7 +1,11 @@
-import { createElementType } from "./utils";
-import { addFolder } from "../sideNavigation";
-import { taskElement, noTask } from "../content";
-import { v4 as uuidv4 } from 'uuid';
+import { createElementType } from "./utils.js";
+import { addFolder } from "../sideNavigation.js";
+import { taskElement, noTask } from "../content.js";
+/* import { v4 as uuidv4 } from 'uuid';
+ */
+
+
+let uuidv4 = () => `1234`
 
 
 export const closeFolderModal  = () =>  {

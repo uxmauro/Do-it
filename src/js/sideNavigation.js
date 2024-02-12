@@ -1,9 +1,9 @@
-import { createElementType } from "./Components/utils"
-import { folderModal, closeFolderModal } from "./Components/modal"
-import { taskElement, addTaskBtn } from "./content";
-import { v4 as uuidv4 } from 'uuid';
+import { createElementType } from "./components/utils.js"
+import { folderModal, closeFolderModal } from "./components/modal.js"
+import { taskElement, addTaskBtn } from "./content.js";
+/* import { v4 as uuidv4 } from 'uuid'; */
 
-
+let uuidv4 = () => `1234`
 
 export const sideNav  = createElementType('sideNav', 'div')
 

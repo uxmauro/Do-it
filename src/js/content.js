@@ -1,5 +1,5 @@
-import { createElementType } from "./Components/utils";
-import { addTaskModal} from "./Components/modal";
+import { createElementType } from "../js/components/utils.js";
+import { addTaskModal} from "../js/components/modal.js";
 
 let firstTaskAdded = false
 

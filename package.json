@@ -5,21 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --output public",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "serve": "npm run preview && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.2.2",
-    "@storybook/addon-interactions": "^7.2.2",
-    "@storybook/addon-links": "^7.2.2",
-    "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/blocks": "^7.2.2",
-    "@storybook/builder-vite": "^7.2.2",
-    "@storybook/react": "^7.2.2",
-    "@storybook/react-vite": "^7.2.2",
-    "@storybook/testing-library": "^0.2.0",
+
+    "gh-pages": "^6.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

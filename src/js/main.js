@@ -1,4 +1,4 @@
-import '../css/global.css'
+import '../styles.css'
 import { sideNav } from './sideNavigation.js'
 import { contentSection } from './content.js'
 

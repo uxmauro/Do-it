@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --output public",
+    "build": "vercel build",
     "preview": "vite preview",
     "serve": "npm run preview && npm run build",
     "deploy": "gh-pages -d dist"

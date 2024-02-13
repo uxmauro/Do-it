@@ -33,6 +33,7 @@
 
 button{
 		/* Resetting default styles */
+		all: unset;
 		border: none;
 		background-color: transparent;
 		padding: 0;
